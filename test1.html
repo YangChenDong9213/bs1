@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动端分类网站</title>
+    <style>
+        :root {
+            --background-color: #f9f9f9;
+            --text-color: black;
+            --active-item-color: #fff;
+            --sidebar-border-color: #eee;
+            --main-content-border-color: #f8f8f8;
+            --link-color: black;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #181818;
+                --text-color: #ffffff;
+                --active-item-color: #303030;
+                --sidebar-border-color: #333333;
+                --main-content-border-color: #333333;
+                --link-color: #9a9a9a;
+            }
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            background-color: var(--background-color);
+            color: var(--text-color);
+
+        }
+
+        .container {
+            display: flex;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            background-color: var(--background-color);
+            border-top: 1px solid var(--sidebar-border-color);
+            position: fixed;
+            height: calc(100vh - 48px);
+            width: 30%;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            margin-left: 30%;
+            /* padding-left: 20px; */
+            height: calc(100vh - 48px);
+            width: 70%;
+            overflow-y: auto;
+            /* border: 1px solid #000; */
+        }
+
+        .main-content ul {
+            /* width: 70%; */
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        .sidebar h3,
+        .main-content h3 {
+            margin-top: 0;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        .sidebar li {
+            padding: 20px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .active {
+            background-color: var(--active-item-color);
+
+        }
+
+
+        .main-contentulli {
+            padding: 20px;
+            cursor: pointer;
+            transition: .3s;
+            border-bottom: 1px solid var(--main-content-border-color);
+
+        }
+
+        .custom-link {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+        h3 {
+            background-color: var(--background-color);
+            /* ... */
+        }
+    </style>
+</head>
+
+<body>
+    <h3 style="margin:0; text-align: center;background-color:#f9f9f9 ;padding: 14px;">酷站</h3>
+
+    <div class="container">
+
+        <div class="sidebar">
+            <ul>
+                <li class="category" data-category="1" style="border-top: 0px solid #eee;">电视剧</li>
+                <li class="category" data-category="2">电影</li>
+                <li class="category" data-category="3">动漫</li>
+                <li class="category" data-category="4">综艺</li>
+                <li class="category" data-category="5">新闻</li>
+                <li class="category" data-category="6">军事</li>
+                <li class="category" data-category="7">财经</li>
+                <li class="category" data-category="2">动漫</li>
+                <li class="category" data-category="3">综艺</li>
+                <li class="category" data-category="4">小说</li>
+                <li class="category" data-category="5">新闻</li>
+                <li class="category" data-category="6">军事</li>
+                <li class="category" data-category="7">财经</li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div id="content">
+
+            </div>
+        </div>
+    </div>
+    <script>
+        const categories = Array.from(document.querySelectorAll('.category'));
+        const contentContainer = document.getElementById('content');
+
+        var tv_websites = {
+            "1": [
+                { "name": "在线看剧", "url": "https://vidhub.tv/" },
+                { "name": "剧迷影视", "url": "https://gimy.is" },
+                { "name": "4K影视", "url": "https://www.4kvm.net/" },
+                { "name": "555影视", "url": "https://555movie.vip/" },
+                { "name": "hoho影视", "url": "https://hoho.tv/" },
+                { "name": "泥视频", "url": "https://www.nivod4.tv/" },
+                { "name": "追剧网", "url": "https://www.kanju8.cc/" },
+                { "name": "天天看剧", "url": "https://libvio.top/" },
+                { "name": "皮皮虾影视", "url": "http://aikun.tv" },
+                { "name": "土豪视频", "url": "https://www.tuhao.tv/" },
+                { "name": "爱奇艺", "url": "http://www.iqiyi.com/" },
+                { "name": "腾讯视频", "url": "https://v.qq.com/" },
+                { "name": "优酷", "url": "https://www.youku.com/" },
+                { "name": "91美剧网", "url": "https://91mjw.vip/vplay/NDAzNy0xLTA=.html" },
+
+            ],
+            "2": [
+                { "name": "大师兄电影网", "url": "https://y3fdwq.dshghjnbv.com/video/dianying" },
+                { "name": "555电影", "url": "https://555movie.top/vodtype/1.html" },
+            ],
+            "3": [
+                { "name": "樱花动漫", "url": "http://www.yhdmba.net/" },
+                { "name": "哔哩哔哩", "url": "http://www.bilibili.com/" },
+                { "name": "风车动漫", "url": "http://www.fengchedm.cc/" },
+                { "name": "风车动漫", "url": "http://www.fengchedm.cc/" },
+
+            ],
+            "4": [
+                { "name": "综艺网", "url": "https://www.spwtv.com/zongyi/index2.html" },
+                { "name": "天天综艺", "url": "https://www.ttzj666.com/v/zongyi/" },
+                { "name": "花姐综艺", "url": "https://www.lyjxwl.com/zongyi/index__meiguo___.html" },
+
+            ],
+            // other categories...
+        }
+
+        function fetchContent(category) {
+            setTimeout(() => {
+                let content = tv_websites[category];
+
+                displayContent(content);
+            }, 500);
+        }
+
+        function displayContent(content) {
+            contentContainer.innerHTML = ''; // clear the old content
+            let ul = document.createElement('ul');
+            content.forEach((item) => {
+                let li = document.createElement('li');
+                li.classList.add('main-contentulli');
+                li.textContent = item.name;
+                li.dataset.url = item.url;
+                li.style.cursor = 'pointer';
+                li.addEventListener('click', function () {
+                    window.open(this.dataset.url);
+                })
+                ul.appendChild(li);
+            });
+            contentContainer.appendChild(ul);
+        }
+
+        categories.forEach(category => {
+            category.addEventListener('click', () => {
+                categories.forEach(category => category.classList.remove('active'));
+                category.classList.add('active');
+
+                const categoryId = category.getAttribute('data-category');
+                fetchContent(categoryId);
+            });
+        });
+
+        // optional: load the first category at startup
+        fetchContent("1");
+        categories[0].classList.add('active');
+    </script>
+</body>
+
+</html>
