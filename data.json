@@ -29,5 +29,5 @@
 "isProhibit":false,
 "notOpenAdFirst":false,
 "isProhibitPlayer":false,
-"isProhibitRead":false
+"isProhibitRead":true
 }
